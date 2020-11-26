@@ -1,0 +1,238 @@
+:root {
+	--dark-text: hsl(229, 25%, 31%);
+	--score-text: hsl(229, 64%, 46%);
+	--header-outline: hsl(217, 16%, 45%);
+}
+html {
+	box-sizing: border-box;
+	font-size: 62.5%;
+}
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+body {
+	background: radial-gradient(
+		circle at center top,
+		hsl(214, 47%, 23%) 20%,
+		hsl(237, 49%, 15%) 100%
+	);
+	color: #fff;
+	font-family: 'Barlow Semi Condensed', system-ui, sans-serif;
+	font-size: 1.6rem;
+	margin: 0;
+	min-height: 100vh;
+	padding-top: 2rem;
+}
+@media (min-width: 56.25em) {
+	body {
+		padding: 4rem 0;
+	}
+}
+.heading-2 {
+	color: var(--dark-text);
+	font-size: 3.2rem;
+	margin: 0;
+	text-transform: uppercase;
+}
+.wrapper {
+	max-width: 133.6rem;
+	margin: 0 auto;
+	padding: 0 2rem;
+}
+.header {
+	border: 3px solid var(--header-outline);
+	border-radius: 0.8rem;
+	margin: 0 auto;
+	padding: 2rem 1rem 2rem 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+@media (min-width: 56.25em) {
+	.header {
+		max-width: 80rem;
+	}
+}
+.logo {
+	cursor: pointer;
+	width: 10rem;
+}
+.score {
+	background-color: #fff;
+	border-radius: 0.6rem;
+	cursor: default;
+	font-size: 1.4rem;
+	height: 8.5rem;
+	letter-spacing: 1px;
+	padding: 1rem;
+	text-align: center;
+	user-select: none;
+	width: 8.5rem;
+}
+.score__text {
+	color: var(--score-text);
+	margin: 0;
+	text-transform: uppercase;
+}
+.score__points {
+	color: var(--dark-text);
+	font-size: 4rem;
+	font-weight: 700;
+	margin: 0;
+}
+@media (min-width: 56.25em) {
+	.score {
+		width: 12rem;
+	}
+	.score__points {
+		font-size: 4.2rem;
+	}
+}
+.game {
+	background: url(../img/bg-triangle.svg) center center / 22rem no-repeat;
+	margin: 6rem auto;
+	max-width: 37.5rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+@media (min-width: 37.5em) {
+	.game {
+		max-width: 60rem;
+		background-size: 30rem;
+	}
+}
+@media (min-width: 75em) {
+	.game {
+		margin-bottom: 2rem;
+	}
+}
+.game__option {
+	border-radius: 50%;
+	cursor: pointer;
+	height: 14rem;
+	padding: 1.5rem;
+	flex: 0 0 14rem;
+}
+@media (min-width: 37.5em) {
+	.game__option {
+		height: 20rem;
+		flex-basis: 20rem;
+		padding: 2.5rem;
+	}
+	.game__option--paper {
+		margin-right: 5rem;
+	}
+}
+.game__option--paper {
+	background: linear-gradient(hsl(230, 89%, 62%), hsl(230, 89%, 65%));
+}
+.game__option--scissors {
+	background: linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));
+}
+.game__option--rock {
+	background: linear-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));
+	margin: 5.5rem auto 0;
+}
+.game__option-inner {
+	background-color: #fff;
+	border-radius: 50%;
+	box-shadow: rgb(186, 191, 212) 0px -4px 0px;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.btn-rules {
+	background: none;
+	border: 3px solid var(--header-outline);
+	border-radius: 0.8rem;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	font-size: 1.4rem;
+	font-weight: 700;
+	letter-spacing: 1px;
+	margin: 0 auto;
+	padding: 1.2rem 4rem;
+	text-transform: uppercase;
+	transition: transform 0.2s;
+}
+.btn-rules:focus,
+.btn-rules:hover {
+	outline: none;
+	transform: scale(1.02);
+}
+@media (min-width: 37.5em) {
+	.btn-rules {
+		margin-right: 2rem;
+		margin-bottom: 2rem;
+	}
+}
+@media (min-width: 56.25em) {
+	.btn-rules {
+		margin-right: 6rem;
+		margin-bottom: 6rem;
+	}
+}
+@media (min-width: 75em) {
+	.btn-rules {
+		margin-bottom: 0;
+	}
+}
+.modal-rules-overlay {
+	background-color: rgba(0, 0, 0, 0.4);
+	height: 100vh;
+	width: 100vw;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: scale(0);
+	transition: transform 0.2s ease;
+}
+.modal-rules-overlay.show {
+	transform: scale(1);
+}
+.modal-rules {
+	background-color: #fff;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+@media (min-width: 56.25em) {
+	.modal-rules {
+		border-radius: 1rem;
+		height: 45rem;
+		max-width: 45rem;
+		padding: 4rem;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+}
+.rules__close {
+	background: none;
+	border: none;
+	cursor: pointer;
+	transition: transform 0.3s;
+}
+.rules__close:focus,
+.rules__close:hover {
+	outline: none;
+	transform: rotate(90deg);
+}
+@media (min-width: 56.25em) {
+	.rules__img {
+		margin: 4rem auto 0;
+		order: 1;
+	}
+}
