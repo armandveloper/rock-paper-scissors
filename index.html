@@ -30,10 +30,10 @@
 				/>
 				<div class="score">
 					<p class="score__text">Score</p>
-					<p class="score__points">12</p>
+					<p class="score__points" id="score">0</p>
 				</div>
 			</header>
-			<div class="game">
+			<div class="game ready" id="game">
 				<div class="game__option game__option--paper">
 					<div class="game__option-inner">
 						<img src="img/icon-paper.svg" alt="Paper" />
@@ -44,7 +44,6 @@
 						<img src="img/icon-scissors.svg" alt="Scissors" />
 					</div>
 				</div>
-
 				<div class="game__option game__option--rock">
 					<div class="game__option-inner">
 						<img src="img/icon-rock.svg" alt="Rock" />
@@ -56,7 +55,13 @@
 		<div class="modal-rules-overlay" id="modal-rules">
 			<div class="modal-rules">
 				<h2 class="heading-2">Rules</h2>
-				<img src="img/image-rules.svg" alt="Rules" class="rules__img" />
+				<div class="rules__img-container">
+					<img
+						src="img/image-rules.svg"
+						alt="Rules"
+						class="rules__img"
+					/>
+				</div>
 				<button
 					class="rules__close"
 					id="btn-close-rules"

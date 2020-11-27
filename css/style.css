@@ -24,10 +24,25 @@ body {
 	margin: 0;
 	min-height: 100vh;
 	padding-top: 2rem;
+	padding-bottom: 4rem;
+	display: flex;
+	flex-direction: column;
+}
+@media (min-width: 37.5em) {
+	body {
+		display: block;
+		padding-bottom: 0;
+	}
 }
 @media (min-width: 56.25em) {
 	body {
 		padding: 4rem 0;
+	}
+}
+@media (min-width: 56.25em) {
+	body {
+		display: flex;
+		flex-direction: column;
 	}
 }
 .heading-2 {
@@ -40,6 +55,8 @@ body {
 	max-width: 133.6rem;
 	margin: 0 auto;
 	padding: 0 2rem;
+	width: 100%;
+	flex: 1;
 }
 .header {
 	border: 3px solid var(--header-outline);
@@ -98,6 +115,15 @@ body {
 	flex-wrap: wrap;
 	justify-content: space-between;
 }
+.game.no-triangle {
+	background: none;
+}
+.game.zoom-out > * {
+	animation: zoom-out 0.3s forwards;
+}
+.game.zoom-in > * {
+	animation: zoom-in 0.3s;
+}
 @media (min-width: 37.5em) {
 	.game {
 		max-width: 60rem;
@@ -115,15 +141,29 @@ body {
 	height: 14rem;
 	padding: 1.5rem;
 	flex: 0 0 14rem;
+	width: 14rem;
+}
+.game__option--with-label {
+	flex: 0 0 14rem;
+	animation: zoom-in 0.3s forwards;
+	display: flex;
+	flex-direction: column;
 }
 @media (min-width: 37.5em) {
 	.game__option {
 		height: 20rem;
 		flex-basis: 20rem;
 		padding: 2.5rem;
+		width: 20rem;
 	}
-	.game__option--paper {
+	.game__option--with-label {
+		flex-basis: 20rem;
+	}
+	.game__option:first-of-type {
 		margin-right: 5rem;
+	}
+	.game__option--with-label .game__option:first-of-type {
+		margin-right: 0;
 	}
 }
 .game__option--paper {
@@ -134,6 +174,8 @@ body {
 }
 .game__option--rock {
 	background: linear-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));
+}
+.game:not(.no-triangle) .game__option--rock {
 	margin: 5.5rem auto 0;
 }
 .game__option-inner {
@@ -146,6 +188,70 @@ body {
 	align-items: center;
 	justify-content: center;
 }
+.game__option-label {
+	cursor: default;
+	letter-spacing: 1px;
+	margin: 2rem 0 0;
+	text-transform: uppercase;
+	text-align: center;
+	user-select: none;
+}
+.game__result {
+	margin-top: 6rem;
+	padding: 0 4rem;
+	text-align: center;
+	flex: 0 0 100%;
+	animation: fade-in 1.2s;
+}
+.game__result-message {
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 5.5rem;
+	margin: 0 0 2rem;
+}
+@media (min-width: 56.25em) {
+	.game.no-triangle {
+		max-width: 80rem;
+		flex-wrap: nowrap;
+		align-items: center;
+	}
+	.game.no-triangle .game__option--with-label:nth-child(2) {
+		order: 1;
+	}
+	.game__result {
+		margin: 0;
+		flex: 1;
+	}
+	.game.no-triangle .game__option-label {
+		order: -1;
+		margin: 0 0 2rem;
+	}
+}
+.btn {
+	background-color: #fff;
+	border: none;
+	border-radius: 1rem;
+	color: var(--dark-text);
+	cursor: pointer;
+	display: block;
+	font-family: inherit;
+	font-size: 1.8rem;
+	letter-spacing: 1.5px;
+	padding: 2rem;
+	text-align: center;
+	text-transform: uppercase;
+	width: 100%;
+}
+.btn:focus {
+	outline: none;
+}
+@media (min-width: 37.5em) {
+	.btn {
+		max-width: 30rem;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
 .btn-rules {
 	background: none;
 	border: 3px solid var(--header-outline);
@@ -153,9 +259,10 @@ body {
 	color: #fff;
 	cursor: pointer;
 	display: block;
-	font-size: 1.4rem;
+	font-family: inherit;
+	font-size: 1.6rem;
 	font-weight: 700;
-	letter-spacing: 1px;
+	letter-spacing: 1.5px;
 	margin: 0 auto;
 	padding: 1.2rem 4rem;
 	text-transform: uppercase;
@@ -175,11 +282,6 @@ body {
 @media (min-width: 56.25em) {
 	.btn-rules {
 		margin-right: 6rem;
-		margin-bottom: 6rem;
-	}
-}
-@media (min-width: 75em) {
-	.btn-rules {
 		margin-bottom: 0;
 	}
 }
@@ -208,15 +310,22 @@ body {
 	justify-content: space-around;
 	align-items: center;
 }
+@media (min-width: 37.5em) {
+	.modal-rules {
+		padding: 2rem;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: start;
+	}
+}
 @media (min-width: 56.25em) {
 	.modal-rules {
 		border-radius: 1rem;
 		height: 45rem;
 		max-width: 45rem;
 		padding: 4rem;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: space-between;
+		align-items: stretch;
 	}
 }
 .rules__close {
@@ -230,9 +339,40 @@ body {
 	outline: none;
 	transform: rotate(90deg);
 }
-@media (min-width: 56.25em) {
-	.rules__img {
-		margin: 4rem auto 0;
+@media (min-width: 37.5em) {
+	.rules__img-container {
+		margin: 2rem auto 0;
 		order: 1;
+		flex: 0 0 100%;
+		text-align: center;
+	}
+}
+@media (min-width: 56.25em) {
+	.rules__img-container {
+		margin-top: 4rem;
+	}
+}
+@keyframes zoom-in {
+	from {
+		transform: scale(0);
+	}
+	to {
+		transform: scale(1);
+	}
+}
+@keyframes zoom-out {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(0);
+	}
+}
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
 	}
 }
