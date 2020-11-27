@@ -149,6 +149,9 @@ body {
 	display: flex;
 	flex-direction: column;
 }
+.game__option--with-label.win .game__option {
+	animation: wave 1s ease forwards;
+}
 @media (min-width: 37.5em) {
 	.game__option {
 		height: 20rem;
@@ -374,5 +377,17 @@ body {
 	}
 	to {
 		opacity: 1;
+	}
+}
+@keyframes wave {
+	from {
+		box-shadow: rgba(255, 255, 255, 0.04) 0px 0px 0px 0px,
+			rgba(255, 255, 255, 0.04) 0px 0px 0px 0px,
+			rgba(255, 255, 255, 0.02) 0px 0px 0px 0px;
+	}
+	to {
+		box-shadow: rgba(255, 255, 255, 0.04) 0px 0px 0px 40px,
+			rgba(255, 255, 255, 0.04) 0px 0px 0px 80px,
+			rgba(255, 255, 255, 0.02) 0px 0px 0px 120px;
 	}
 }

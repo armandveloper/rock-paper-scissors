@@ -50,9 +50,9 @@ const generateOptionTemplate = (option) => {
 	return template;
 };
 
-const generateOptionWithLabelTemplate = (option, isUser) => {
+const generateOptionWithLabelTemplate = (option, isUser, isWinner) => {
 	const template = `
-    <div class="game__option--with-label">
+    <div class="game__option--with-label ${isWinner ? 'win' : ''}">
       ${generateOptionTemplate(option)}
       ${
 			isUser
@@ -78,9 +78,25 @@ const closeRules = () => {
 	$modalRules.classList.remove('show');
 };
 
-const showOptionsPicked = (user, cpu) => {
-	const userTemplate = generateOptionWithLabelTemplate(user, true),
-		cpuTemplate = generateOptionWithLabelTemplate(cpu, false);
+const determineWinner = (message) => {
+	return message === messages[0]
+		? 'cpu'
+		: message === messages[2]
+		? 'user'
+		: 'draw';
+};
+
+const showOptionsPicked = (user, cpu, winner) => {
+	const userTemplate = generateOptionWithLabelTemplate(
+			user,
+			true,
+			winner === 'user'
+		),
+		cpuTemplate = generateOptionWithLabelTemplate(
+			cpu,
+			false,
+			winner === 'cpu'
+		);
 	clearContainer($game);
 	$game.classList.add('no-triangle');
 	$game.innerHTML = userTemplate + cpuTemplate;
@@ -112,8 +128,9 @@ const updateScore = (message) => {
 
 const startGame = (userOption) => {
 	const cpuOption = pickOption();
-	showOptionsPicked(userOption, cpuOption);
 	const message = whoWin(userOption, cpuOption);
+	const winner = determineWinner(message);
+	showOptionsPicked(userOption, cpuOption, winner);
 	showResult(message);
 	updateScore(message);
 };
