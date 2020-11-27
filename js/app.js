@@ -137,6 +137,9 @@ const startGame = (userOption) => {
 
 const restartGame = () => {
 	const handleRestartAnimation = ({ animationName }) => {
+		if (animationName === 'wave') {
+			return;
+		}
 		$game.classList.remove(animationName);
 		if (animationName === 'zoom-out') {
 			clearContainer($game);
